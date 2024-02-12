@@ -6,7 +6,7 @@ const handleGenerateNewShortUrl = async (req, res) => {
   try {
     const shortID = new ShortUniqueId({ length: 8 }).rnd();
     console.log("Generated Short ID:", shortID);
-
+    const allUrls = await URL.find({});
     const { url } = req.body;
     console.log("Received URL:", url);
 
@@ -21,7 +21,7 @@ const handleGenerateNewShortUrl = async (req, res) => {
     });
 
     console.log("URL created successfully:", url);
-    return res.render("home", { id: shortID });
+    return res.render("home", { id: shortID, urls: allUrls });
   } catch (error) {
     console.error("Error generating short URL:", error);
     return res.status(500).json({ error: "Internal Server Error" });
