@@ -9,7 +9,7 @@ const router = express.Router();
 
 // Routes
 
-router.get("/", handleViewShortUrl);
+router.get("/ViewAll", handleViewShortUrl);
 router.post("/", handleGenerateNewShortUrl);
 router.get("/:shortID", handleUrlRedirects);
 router.get("/analytics/:shortID", handleGetAnalytics);

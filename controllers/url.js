@@ -3,18 +3,29 @@ const URL = require("../models/url");
 const { default: ShortUniqueId } = require("short-unique-id");
 
 const handleGenerateNewShortUrl = async (req, res) => {
-  const GetNewShortID = await new ShortUniqueId({ length: 8 });
-  const ShortID = GetNewShortID.rnd();
-  console.log(ShortID);
-  const body = req.body;
-  if (!body.url) return res.status(400).json({ erroe: "URL is Required" });
-  await URL.create({
-    shortID: ShortID,
-    redirectURL: body.url,
-    visitHistory: [],
-  });
+  try {
+    const shortID = new ShortUniqueId({ length: 8 }).rnd();
+    console.log("Generated Short ID:", shortID);
 
-  return res.json({ id: ShortID });
+    const { url } = req.body;
+    console.log("Received URL:", url);
+
+    if (!url) {
+      return res.status(400).json({ error: "URL is required" });
+    }
+
+    await URL.create({
+      shortID,
+      redirectURL: url,
+      visitHistory: [],
+    });
+
+    console.log("URL created successfully:", url);
+    return res.render("home", { id: shortID });
+  } catch (error) {
+    console.error("Error generating short URL:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 const handleViewShortUrl = async (req, res) => {
