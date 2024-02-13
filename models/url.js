@@ -5,6 +5,10 @@ const urlSchema = new mongoose.Schema(
     shortID: { type: String, require: true },
     redirectURL: { type: String, require: true },
     userVisitHistory: [{ timestamps: { type: Number } }],
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
   },
   { timestamps: true }
 );

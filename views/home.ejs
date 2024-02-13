@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
       h1 {
@@ -12,29 +19,35 @@
       }
 
       form {
-        margin: 20px auto;
-        width: 60%;
         text-align: center;
+        margin-top: 20px;
       }
 
-      form label {
+      label {
         display: block;
         margin-bottom: 10px;
       }
 
-      form input[type="text"] {
+      input[type="text"] {
         width: 80%;
         padding: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
       }
 
-      form button {
+      button {
         padding: 10px 20px;
         background-color: #007bff;
         color: #fff;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
       }
 
       table {
@@ -65,12 +78,9 @@
         background-color: #f2f2f2;
       }
     </style>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Short URL</title>
   </head>
   <body>
-    <h1>URL SHORTENER</h1>
+    <h1>URL Shortener</h1>
     <% if (locals.id) { %>
     <p>
       URL Generated:
@@ -79,25 +89,28 @@
       >
     </p>
     <% } %>
-    <form method="POST" action="/url/create">
-      <label for="url">Enter Long URL</label>
-      <input
-        type="text"
-        id="url"
-        name="url"
-        placeholder="https://example.com/slug/12345/abcdefgh?query=string"
-      />
-      <button type="submit">Generate Short URL</button>
-    </form>
 
     <div>
-      <% if (urls && urls?.length > 0) { %>
+      <form method="POST" action="/url/create">
+        <label for="url">Enter Your Original URL</label>
+        <input
+          type="text"
+          id="url"
+          name="url"
+          placeholder="https://example.com"
+        />
+        <button type="submit">Generate</button>
+      </form>
+    </div>
+
+    <div style="margin-top: 30px">
+      <% if (locals.urls) { %>
       <table>
         <thead>
           <tr>
             <th>S. No</th>
-            <th>Short URLs</th>
-            <th>Redirect URLs</th>
+            <th>ShortID</th>
+            <th>Redirect</th>
             <th>Clicks</th>
           </tr>
         </thead>
@@ -105,15 +118,13 @@
           <% urls.forEach((url, index) => { %>
           <tr>
             <td><%= index + 1 %></td>
-            <td>http://localhost:5000/url/<%=url.shortID %></td>
+            <td>http://localhost:5000/url/<%= url.shortID %></td>
             <td><%= url.redirectURL %></td>
             <td><%= url.userVisitHistory.length %></td>
           </tr>
           <% }) %>
         </tbody>
       </table>
-      <% } else { %>
-      <p>No data available</p>
       <% } %>
     </div>
   </body>

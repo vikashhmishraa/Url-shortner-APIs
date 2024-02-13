@@ -1,27 +1,37 @@
 const { shortid } = require("shortid");
 const URL = require("../models/url");
+const users = require("../models/users");
 const { default: ShortUniqueId } = require("short-unique-id");
 
 const handleGenerateNewShortUrl = async (req, res) => {
   try {
     const shortID = new ShortUniqueId({ length: 8 }).rnd();
     console.log("Generated Short ID:", shortID);
-    const allUrls = await URL.find({});
     const { url } = req.body;
+
     console.log("Received URL:", url);
 
     if (!url) {
       return res.status(400).json({ error: "URL is required" });
     }
 
+    // Assuming you have some authentication middleware that sets req.user
+    const { _id } = req.user;
+
+    // Assuming users is your user model
+    const createdBy = await users.findOne({ _id });
+
+    console.log("Created By:", createdBy);
+
     await URL.create({
       shortID,
       redirectURL: url,
-      visitHistory: [],
+      userVisitHistory: [],
+      createdBy,
     });
 
     console.log("URL created successfully:", url);
-    return res.render("home", { id: shortID, urls: allUrls });
+    return res.render("home", { id: shortID });
   } catch (error) {
     console.error("Error generating short URL:", error);
     return res.status(500).json({ error: "Internal Server Error" });
