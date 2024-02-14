@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const URL = require("./models/url");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const { restrictToLoggedinUserOnly } = require("./middleware/auth");
+const { restrictToLoggedinUserOnly, checkAuth } = require("./middleware/auth");
 
 // Importing Routes
 const urlRouter = require("./routes/url");
@@ -45,8 +45,8 @@ app.use("/hello", (req, res) => {
 // All Dynamic Routes
 app.use("/url", restrictToLoggedinUserOnly, urlRouter);
 // Static Routes
-app.use("/", staticRoutes);
+app.use("/", checkAuth, staticRoutes);
 // User Routes
-app.use("/user", userRoutes);
+app.use("/user", checkAuth, userRoutes);
 
 app.listen(PORT, console.log(`Server is listening on ${PORT}`));
