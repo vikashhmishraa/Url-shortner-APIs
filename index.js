@@ -6,7 +6,12 @@ const mongoose = require("mongoose");
 const URL = require("./models/url");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const { restrictToLoggedinUserOnly, checkAuth } = require("./middleware/auth");
+const {
+  // restrictToLoggedinUserOnly,
+  // checkAuth,
+  checkForAuthentication,
+  restrictTo,
+} = require("./middleware/auth");
 
 // Importing Routes
 const urlRouter = require("./routes/url");
@@ -16,6 +21,7 @@ const staticRoutes = require("./routes/staticRoutes");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(checkForAuthentication);
 
 // Setting up EJS
 app.set("view engine", "ejs");
@@ -41,12 +47,11 @@ ConnectDatabase("mongodb://127.0.0.1:27017/short-url", {
 app.use("/hello", (req, res) => {
   res.send("hello Hello");
 });
-
 // All Dynamic Routes
-app.use("/url", restrictToLoggedinUserOnly, urlRouter);
+app.use("/url", urlRouter);
 // Static Routes
-app.use("/", checkAuth, staticRoutes);
+app.use("/", staticRoutes);
 // User Routes
-app.use("/user", checkAuth, userRoutes);
+app.use("/user", userRoutes);
 
 app.listen(PORT, console.log(`Server is listening on ${PORT}`));

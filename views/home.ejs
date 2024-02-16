@@ -112,6 +112,7 @@
             <th>ShortID</th>
             <th>Redirect</th>
             <th>Clicks</th>
+            <th>Created By</th>
           </tr>
         </thead>
         <tbody>
@@ -121,6 +122,7 @@
             <td>http://localhost:5000/url/<%= url.shortID %></td>
             <td><%= url.redirectURL %></td>
             <td><%= url.userVisitHistory.length %></td>
+            <td><%= url.createdBy.name %></td>
           </tr>
           <% }) %>
         </tbody>

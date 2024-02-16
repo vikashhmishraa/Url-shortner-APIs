@@ -7,11 +7,7 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        background: linear-gradient(
-          135deg,
-          #7e58cf,
-          #9b59b6
-        ); /* Gradient background */
+        background-color: #f5f5f5;
         margin: 0;
         padding: 0;
         display: flex;
@@ -21,66 +17,61 @@
       }
 
       .container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 40px;
         width: 300px;
-        background-color: rgba(
-          255,
-          255,
-          255,
-          0.2
-        ); /* White with transparency */
-        padding: 20px;
-        border-radius: 10px;
-        backdrop-filter: blur(10px); /* Blur effect */
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
+        text-align: center;
       }
 
       h1 {
-        text-align: center;
-        color: #fff;
-      }
-
-      form {
-        margin-top: 30px;
+        margin-bottom: 20px;
+        color: #333333;
       }
 
       label {
         display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #fff;
+        margin-bottom: 6px;
+        color: #666666;
+        font-size: 14px;
+        text-align: left;
       }
 
-      input[type="email"],
-      input[type="password"] {
+      input {
         width: 100%;
         padding: 10px;
         margin-bottom: 20px;
-        border: none;
-        border-radius: 5px;
-        background-color: rgba(
-          255,
-          255,
-          255,
-          0.2
-        ); /* White with transparency */
-        color: #fff;
+        border-radius: 4px;
+        border: 1px solid #cccccc;
         box-sizing: border-box;
       }
 
-      button[type="submit"] {
+      button {
         width: 100%;
         padding: 12px;
-        background-color: #007bff; /* Blue color */
-        color: #fff;
+        background-color: #007bff;
+        color: #ffffff;
         border: none;
-        border-radius: 5px;
+        border-radius: 4px;
         cursor: pointer;
-        font-size: 16px;
         transition: background-color 0.3s ease;
       }
 
-      button[type="submit"]:hover {
-        background-color: #0056b3; /* Darker blue on hover */
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .register-link {
+        margin-top: 20px;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 14px;
+        display: inline-block;
+      }
+
+      .register-link:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
@@ -94,6 +85,7 @@
         <input name="password" type="password" required />
         <button type="submit">Login</button>
       </form>
+      <a href="/signup" class="register-link">Click here if not registered</a>
     </div>
   </body>
 </html>
