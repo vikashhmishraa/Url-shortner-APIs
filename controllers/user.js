@@ -28,7 +28,18 @@ async function handleLoginUser(req, res) {
   // return res.json({ token });
 }
 
+async function handleLogoutUser(req, res) {
+  // Invalidate JWT token on the server-side (this step depends on your authentication mechanism)
+
+  // Set the cookie to expire by setting its expiration date to a past date
+  res.cookie("token", "", { expires: new Date(0) });
+
+  // Redirect the user to the login page or any other appropriate page
+  res.redirect("/login");
+}
+
 module.exports = {
   handleCreateUser,
   handleLoginUser,
+  handleLogoutUser,
 };

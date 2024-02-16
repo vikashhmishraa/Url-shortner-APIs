@@ -24,5 +24,4 @@ function getUser(token) {
 module.exports = {
   setUser,
   getUser,
-  signOutUser,
 };

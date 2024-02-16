@@ -77,6 +77,34 @@
       tr:hover {
         background-color: #f2f2f2;
       }
+
+      .logout-form {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .logout-form button {
+        padding: 10px 20px;
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .logout-form button:hover {
+        background-color: #c82333;
+      }
+
+      .register-link {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 14px;
+      }
+
+      .register-link:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
@@ -128,6 +156,11 @@
         </tbody>
       </table>
       <% } %>
+      <div class="logout-form">
+        <form method="get" action="/user/logout">
+          <button type="submit">Log Out</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
