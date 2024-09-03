@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-const PORT = 5000;
 const { ConnectDatabase } = require("./connect");
 const mongoose = require("mongoose");
 const URL = require("./models/url");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
+
 const {
   // restrictToLoggedinUserOnly,
   // checkAuth,
@@ -54,4 +55,7 @@ app.use("/", staticRoutes);
 // User Routes
 app.use("/user", userRoutes);
 
-app.listen(PORT, console.log(`Server is listening on ${PORT}`));
+app.listen(
+  process.env.PORT,
+  console.log(`Server is listening on ${process.env.PORT}`)
+);

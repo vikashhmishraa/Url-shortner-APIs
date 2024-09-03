@@ -112,8 +112,8 @@
     <% if (locals.id) { %>
     <p>
       URL Generated:
-      <a href="http://localhost:5000/url/<%= id %>"
-        >http://localhost:5000/url/<%= id %></a
+      <a href="http://localhost:5500/url/<%= id %>"
+        >http://localhost:5500/url/<%= id %></a
       >
     </p>
     <% } %>
@@ -147,7 +147,7 @@
           <% urls.forEach((url, index) => { %>
           <tr>
             <td><%= index + 1 %></td>
-            <td>http://localhost:5000/url/<%= url.shortID %></td>
+            <td>http://localhost:5500/url/<%= url.shortID %></td>
             <td><%= url.redirectURL %></td>
             <td><%= url.userVisitHistory.length %></td>
             <td><%= url.createdBy.name %></td>
