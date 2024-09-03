@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const URL = require("./models/url");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const DB_NAME = require("./constants.js");
 require("dotenv").config();
 
 const {
@@ -30,7 +31,7 @@ app.set("views", path.resolve("./views"));
 
 //  Connect Database ( MongoDB )
 
-ConnectDatabase("mongodb://127.0.0.1:27017/short-url", {
+ConnectDatabase(`${process.env.MONGO_URI}${DB_NAME}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {

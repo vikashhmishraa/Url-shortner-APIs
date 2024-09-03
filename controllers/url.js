@@ -33,8 +33,10 @@ const handleGenerateNewShortUrl = async (req, res) => {
     console.log("URL created successfully:", url);
     return res.render("home", {
       id: shortID,
-      baseUrl: process.env.BASE_URL,
-      Port: process.env.PORT,
+      url: {
+        baseUrl: process.env.BASE_URL,
+        Port: process.env.PORT,
+      },
     });
   } catch (error) {
     console.error("Error generating short URL:", error);
